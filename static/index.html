@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI News — Daily Report</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- STICKY HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span>AI News <span class="logo-dim">Daily Report</span></span>
+      </div>
+      <div class="header-right">
+        <span class="status-pill" id="status-pill">
+          <span class="status-dot" id="status-dot"></span>
+          <span id="status-label">Loading...</span>
+        </span>
+        <button class="btn-refresh" id="refresh-btn">
+          <svg id="refresh-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <polyline points="1 20 1 14 7 14"/>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+          </svg>
+          Fetch latest
+        </button>
+      </div>
+    </div>
+    <!-- Progress bar for scroll -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+  </header>
+
+  <!-- REPORT WRAPPER — single column, like a document -->
+  <div class="report-wrap">
+
+    <!-- REPORT TITLE BLOCK -->
+    <div class="report-title-block" id="report-title-block">
+      <div class="report-edition" id="report-edition">Loading...</div>
+      <h1 class="report-heading">AI & Tech News</h1>
+      <p class="report-subheading">Last 24 hours · Sourced from top publications, Reddit & X</p>
+      <div class="report-meta-row">
+        <span class="meta-chip" id="meta-count">— stories</span>
+        <span class="meta-sep">·</span>
+        <span class="meta-chip" id="meta-sources">— sources</span>
+        <span class="meta-sep">·</span>
+        <span class="meta-chip" id="meta-updated">Last updated —</span>
+      </div>
+      <!-- Jump links -->
+      <div class="jump-nav">
+        <a href="#articles-section" class="jump-link">Stories ↓</a>
+        <a href="#summary-section" class="jump-link">Summary ↓</a>
+        <a href="#sources-section" class="jump-link">Sources ↓</a>
+      </div>
+    </div>
+
+    <!-- ── SECTION 1: ARTICLES ─────────────────────────── -->
+    <section id="articles-section">
+
+      <div class="section-label">
+        <span class="section-num">01</span>
+        <span class="section-title">Today's Stories</span>
+        <span class="section-count" id="article-count"></span>
+      </div>
+
+      <!-- LOADING -->
+      <div id="loading-state">
+        <div class="skeleton-article"></div>
+        <div class="skeleton-article"></div>
+        <div class="skeleton-article"></div>
+      </div>
+
+      <!-- ARTICLES rendered here -->
+      <div id="articles-list"></div>
+
+    </section>
+
+    <!-- ── SECTION 2: SUMMARY ──────────────────────────── -->
+    <section id="summary-section" class="summary-section" style="display:none;">
+
+      <div class="section-label">
+        <span class="section-num">02</span>
+        <span class="section-title">Daily Briefing</span>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-icon">◈</div>
+        <p class="summary-text" id="summary-text"></p>
+        <div class="summary-footer" id="summary-footer"></div>
+      </div>
+
+      <!-- Category breakdown inside summary -->
+      <div class="cat-breakdown" id="cat-breakdown"></div>
+
+    </section>
+
+    <!-- ── SECTION 3: SOURCES ──────────────────────────── -->
+    <section id="sources-section" class="sources-section" style="display:none;">
+
+      <div class="section-label">
+        <span class="section-num">03</span>
+        <span class="section-title">All Sources</span>
+        <span class="section-count" id="sources-count"></span>
+      </div>
+
+      <p class="sources-intro">Every publication, subreddit and account from which today's stories were collected.</p>
+
+      <div class="sources-table" id="sources-table"></div>
+
+      <!-- Full link list -->
+      <div class="section-label" style="margin-top:48px;">
+        <span class="section-num">04</span>
+        <span class="section-title">All Article Links</span>
+      </div>
+      <p class="sources-intro">Direct links to every story, in the order they appeared above.</p>
+      <ol class="links-list" id="links-list"></ol>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="report-footer">
+      <span>AI News Bot</span>
+      <span class="footer-sep">·</span>
+      <span>Powered by Groq & Mistral</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-date"></span>
+    </footer>
+
+  </div><!-- /report-wrap -->
+
+  <!-- BACK TO TOP -->
+  <button class="back-top" id="back-top" title="Back to top">↑</button>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SIDEBAR — overlay + panel
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- Dim overlay — clicking closes the sidebar -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Detail sidebar panel -->
+  <aside class="detail-sidebar" id="detail-sidebar" role="complementary" aria-label="Article deep-dive">
+
+    <!-- Sidebar header bar -->
+    <div class="sidebar-header">
+      <div class="sidebar-header-left">
+        <span class="sidebar-label">Deep Dive</span>
+      </div>
+      <button class="sidebar-close" id="sidebar-close" title="Close (Esc)" aria-label="Close sidebar">✕</button>
+    </div>
+
+    <!-- Scrollable body — content injected by app.js -->
+    <div class="sidebar-body" id="sidebar-body"></div>
+
+  </aside>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

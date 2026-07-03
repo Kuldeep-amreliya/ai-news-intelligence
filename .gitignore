@@ -1,0 +1,5 @@
+__pycache__/
+data/
+myenv/
+.env
+doc.txt
