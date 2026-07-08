@@ -1,34 +1,36 @@
 # 🚀 AI News Intelligence
 
-> An AI-powered news intelligence platform that automatically collects the latest AI news, generates intelligent summaries, performs multi-agent article analysis, and delivers a clean daily news dashboard with email reports.
+An AI-powered news intelligence platform that automatically collects the latest Artificial Intelligence news from trusted sources, generates intelligent summaries using Large Language Models (LLMs), performs multi-agent article analysis, and presents everything through a modern React dashboard with automated email reports.
 
 ---
 
 ## 📖 Overview
 
-AI News Intelligence is an end-to-end AI news aggregation platform that continuously collects the latest Artificial Intelligence news from trusted public sources, enriches each article using Large Language Models (LLMs), and presents everything in a modern interactive dashboard.
+AI News Intelligence is an end-to-end AI news aggregation platform designed to help users stay up to date with the rapidly evolving AI ecosystem without reading dozens of articles every day.
 
-Instead of simply displaying news headlines, the platform provides:
+The platform continuously gathers news from multiple trusted AI sources, removes duplicates, enriches each article using LLMs, categorizes the content, generates a daily AI briefing, and delivers everything through a clean and responsive dashboard.
 
-- AI-generated summaries
-- Intelligent categorization
-- Daily AI briefing
-- Multi-agent article analysis
-- Interactive article deep dives
-- Automated email reports
+Instead of simply displaying headlines, the platform provides:
 
-The goal is to save users from reading dozens of news articles while still understanding everything important happening in the AI ecosystem.
+- 🤖 AI-generated summaries
+- 🏷 Intelligent article categorization
+- 🧠 Multi-agent article analysis
+- 📄 Daily AI briefing
+- 📧 Automated HTML email digest
+- ⚡ Modern React dashboard
+- 📊 Source statistics
+- 🔄 Automatic news refresh
 
 ---
 
 # ✨ Features
 
-### 📰 AI News Aggregation
+## 📰 AI News Aggregation
 
-Collects AI news from multiple sources including:
+Collects AI news from multiple trusted public sources including:
 
 - Hugging Face Blog
-- ArXiv
+- ArXiv (AI & Machine Learning)
 - TechCrunch AI
 - VentureBeat AI
 - MIT AI News
@@ -36,89 +38,111 @@ Collects AI news from multiple sources including:
 - Reddit
 - X (via Nitter)
 
+The scraper periodically fetches new articles while avoiding duplicates.
+
 ---
 
-### 🤖 AI-Powered Summaries
+## 🤖 AI-Powered Summaries
 
-Every article is automatically summarized using LLMs.
+Every collected article is automatically summarized using Large Language Models.
 
-The summary explains:
+Each summary explains:
 
 - What happened
 - Why it matters
-- Key information
+- Key insights
+- Important takeaways
+
+This allows users to quickly understand articles without reading the full content.
 
 ---
 
-### 🏷 Intelligent Categorization
+## 🏷 Intelligent Categorization
 
 Articles are automatically classified into categories such as:
 
 - Research
 - Product Launch
+- Open Source
 - Industry
 - Policy
-- Open Source
-- Tools
+- AI Tools
+- Models
+- Infrastructure
 
 ---
 
-### 📄 Daily AI Briefing
+## 📄 Daily AI Briefing
 
-Generates a complete daily briefing summarizing the most important developments across all collected articles.
+The system generates a complete AI briefing summarizing the most important developments of the day.
+
+The briefing combines information from all collected articles into one concise report.
 
 ---
 
-### 🧠 Multi-Agent Article Analysis
+## 🧠 Multi-Agent Article Analysis
 
-The project includes a two-agent workflow for article exploration.
+The platform includes a two-agent workflow for deep article exploration.
 
-#### Agent 1 — Reader
+### 📖 Reader Agent
 
-- Fetches the complete article
-- Extracts the readable content
-- Falls back gracefully if the article cannot be retrieved
+Responsible for:
 
-#### Agent 2 — Writer
+- Fetching the original article
+- Extracting clean readable content
+- Removing unnecessary HTML
+- Gracefully handling unavailable pages
+
+---
+
+### ✍ Writer Agent
 
 Uses an LLM to generate:
 
 - Overview
 - Key Points
-- Background & Context
+- Background
+- Context
 - Why It Matters
+- Future Implications
 
-This allows users to understand an article without visiting the original website.
-
----
-
-### 📧 Daily Email Digest
-
-Automatically sends a beautifully formatted HTML email containing:
-
-- Daily briefing
-- Top AI stories
-- AI summaries
+This allows users to understand the complete article without visiting the original website.
 
 ---
 
-### 🎨 Interactive Dashboard
+## 🎨 Modern React Dashboard
 
-Modern dashboard built with:
+The frontend is built using **React + TypeScript** and provides:
 
-- Responsive layout
-- Dark theme
-- Scroll progress
-- Category badges
-- Daily briefing
+- Responsive UI
+- Component-based architecture
+- Interactive article cards
+- Daily AI briefing
 - Source statistics
-- Interactive sidebar
+- Category badges
+- Sidebar article details
+- Loading indicators
+- Error handling
 - Manual refresh
-- Auto refresh
+- Automatic refresh
+- Modern clean design
 
 ---
 
-# 🏗 Project Architecture
+## 📧 Automated Email Digest
+
+The platform automatically generates beautifully formatted HTML email reports containing:
+
+- Daily AI Briefing
+- Top AI Stories
+- AI-generated Summaries
+- Source Links
+
+Users can receive the latest AI news directly in their inbox.
+
+---
+
+# 🏗 System Architecture
 
 ```
                     Scheduler
@@ -132,25 +156,28 @@ Modern dashboard built with:
         │               │                │
         └───────────────┼────────────────┘
                         ▼
-                Article Deduplication
+             Article Deduplication
                         │
                         ▼
               AI Summarization (LLM)
                         │
                         ▼
-            Daily Briefing Generation
+           Daily Briefing Generation
                         │
                         ▼
-                 Local JSON Storage
+                  JSON Storage
                         │
-        ┌───────────────┼─────────────────┐
-        ▼               ▼                 ▼
-    Dashboard      Email Digest     Deep Dive API
+                        ▼
+                  FastAPI Backend
+                        │
+        ┌───────────────┼────────────────┐
+        ▼               ▼                ▼
+ React Dashboard    Email Digest   Article API
 ```
 
 ---
 
-# 🧠 Two-Agent Workflow
+# 🧠 Multi-Agent Workflow
 
 ```
 User clicks "Know More"
@@ -159,17 +186,17 @@ User clicks "Know More"
 
         ▼
 
-Reader Agent
+ Reader Agent
 
-↓
+        │
 
-Fetch article
+Fetch complete article
 
-↓
+        │
 
-Extract clean text
+Extract clean content
 
-↓
+        │
 
 Fallback if unavailable
 
@@ -177,34 +204,41 @@ Fallback if unavailable
 
         ▼
 
-Writer Agent
+ Writer Agent
 
-↓
+        │
 
-Overview
+Generate:
 
-↓
+• Overview
 
-Key Points
+• Key Points
 
-↓
+• Context
 
-Context
+• Background
 
-↓
-
-Implications
+• Implications
 
         │
 
         ▼
 
-Interactive Sidebar
+React Sidebar
 ```
 
 ---
 
 # 🛠 Tech Stack
+
+## Frontend
+
+- React
+- TypeScript
+- Vite
+- CSS3
+
+---
 
 ## Backend
 
@@ -215,21 +249,21 @@ Interactive Sidebar
 - BeautifulSoup
 - Feedparser
 
+---
+
 ## AI
 
-- Groq
-- Mistral AI
+- Groq API
 - Llama 3.3 70B
+- Mistral AI
 
-## Frontend
-
-- HTML
-- CSS
-- JavaScript
+---
 
 ## Storage
 
 - JSON
+
+---
 
 ## Email
 
@@ -242,23 +276,36 @@ Interactive Sidebar
 ```
 AI-News-Intelligence/
 
+├── backend/
 │
 ├── article_agent.py
 ├── emailer.py
 ├── llm.py
-├── main.py
 ├── scraper.py
 ├── storage.py
+├── main.py
 │
 ├── data/
 │   └── news.json
 │
-├── static/
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
-│
 ├── requirements.txt
+│
+├── frontend/
+│
+├── src/
+│   ├── components/
+│   ├── services/
+│   ├── assets/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── public/
+│
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+│
 ├── .env.example
 ├── .gitignore
 └── README.md
@@ -268,33 +315,35 @@ AI-News-Intelligence/
 
 # ⚙ Installation
 
-Clone the repository
+## Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-news-intelligence.git
+git clone https://github.com/Kuldeep-amareliya/ai-news-intelligence.git
 ```
 
-Move into the project
-
-```bash
+```
 cd ai-news-intelligence
 ```
 
-Create a virtual environment
+---
+
+## Backend Setup
+
+Create virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate it
+Activate
 
-### Windows
+Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-### Linux / macOS
+Linux / macOS
 
 ```bash
 source venv/bin/activate
@@ -308,18 +357,28 @@ pip install -r requirements.txt
 
 ---
 
+## Frontend Setup
+
+Install packages
+
+```bash
+npm install
+```
+
+---
+
 # 🔑 Environment Variables
 
 Create a `.env` file.
 
-```
-GROQ_API_KEY=YOUR_GROQ_KEY
+```env
+GROQ_API_KEY=YOUR_GROQ_API_KEY
 
-MISTRAL_API_KEY=YOUR_MISTRAL_KEY
+MISTRAL_API_KEY=YOUR_MISTRAL_API_KEY
 
-EMAIL_ADDRESS=your_email@gmail.com
+EMAIL_ADDRESS=YOUR_EMAIL
 
-EMAIL_PASSWORD=your_gmail_app_password
+EMAIL_PASSWORD=YOUR_APP_PASSWORD
 
 SCRAPE_INTERVAL_HOURS=6
 
@@ -332,16 +391,30 @@ DIGEST_MINUTE=0
 
 # ▶ Running the Application
 
-Start the server
+## Start Backend
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Open
+Backend:
 
 ```
 http://127.0.0.1:8000
+```
+
+---
+
+## Start Frontend
+
+```bash
+npm run dev
+```
+
+Frontend:
+
+```
+http://localhost:5173
 ```
 
 ---
@@ -353,6 +426,8 @@ http://127.0.0.1:8000
 ```
 GET /
 ```
+
+Returns frontend dashboard.
 
 ---
 
@@ -366,9 +441,9 @@ Returns
 
 ```json
 {
-    "articles": [],
-    "briefing": "",
-    "last_scraped": ""
+  "articles": [],
+  "briefing": "",
+  "last_scraped": ""
 }
 ```
 
@@ -394,7 +469,7 @@ Starts the scraping pipeline manually.
 
 ---
 
-## Deep Dive
+## Article Deep Dive
 
 ```
 POST /api/article-detail
@@ -404,11 +479,11 @@ Returns
 
 ```json
 {
-    "title": "",
-    "overview": "",
-    "key_points": [],
-    "context": "",
-    "implications": ""
+  "title": "",
+  "overview": "",
+  "key_points": [],
+  "context": "",
+  "implications": ""
 }
 ```
 
@@ -416,19 +491,19 @@ Returns
 
 # 🚀 Future Improvements
 
-- Search functionality
-- Category filtering
-- Semantic duplicate detection
-- Related articles
-- Article embeddings
 - PostgreSQL support
-- User authentication
-- AI chat with articles
-- Bookmarking
-- Reading history
-- Vector search
-- RAG-powered question answering
 - Docker deployment
+- Redis caching
+- Vector Database
+- Semantic Search
+- AI Chat with Articles
+- RAG-powered Question Answering
+- User Authentication
+- Saved Articles
+- Reading History
+- Related Articles
+- WebSocket Live Updates
+- Mobile Application
 
 ---
 
@@ -436,16 +511,29 @@ Returns
 
 Contributions, issues, and feature requests are welcome.
 
-Feel free to fork the repository and submit a pull request.
+If you'd like to improve the project:
 
-----
+1. Fork the repository.
+2. Create your feature branch.
+3. Commit your changes.
+4. Push to your branch.
+5. Open a Pull Request.
+
+---
 
 # 👨‍💻 Author
 
 **Kuldeep Amareliya**
 
+AI/ML Engineer
+
+- GitHub: https://github.com/Kuldeep-amareliya
 - LinkedIn: https://www.linkedin.com/in/kuldeep-amareliya/
 
 ---
 
-## ⭐ If you found this project useful, consider giving it a star!
+# ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+It helps others discover the project and supports future development.
