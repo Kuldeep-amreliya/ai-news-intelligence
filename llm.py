@@ -307,8 +307,9 @@ def summarize_articles(articles: list[dict]) -> list[dict]:
     """
     import json
 
-    to_process = [a for a in articles if not a.get("summary")]
-    logger.info(f"LLM: summarizing {len(to_process)} articles in batches of {BATCH_SIZE}")
+    to_process = [a for a in articles if not a.get("summary")][:10]
+    if to_process:
+        logger.info(f"LLM: summarizing {len(to_process)} articles in batches of {BATCH_SIZE}")
 
     # Build an id→article map for fast lookup
     id_map = {a["id"]: a for a in articles}

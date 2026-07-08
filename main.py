@@ -234,10 +234,19 @@ def run_pipeline():
         merged = new_articles + old_articles
         merged = merged[:100]
 
-        merged = summarize_articles(merged)
+        # Save immediately to disk so the dashboard is populated with raw articles right away
+        save(merged, "Generating briefing...")
+        logger.info(f"Saved {len(merged)} raw articles to storage.")
 
+        # Generate daily briefing (1 LLM call)
         briefing = generate_briefing(merged)
         save(merged, briefing)
+        logger.info("Saved briefing to storage.")
+
+        # Summarize top 10 articles (max 2 LLM calls)
+        merged = summarize_articles(merged)
+        save(merged, briefing)
+
         logger.info(f"Pipeline complete. {len(merged)} total articles stored.")
     except Exception as e:
         logger.error(f"Pipeline error: {e}", exc_info=True)
